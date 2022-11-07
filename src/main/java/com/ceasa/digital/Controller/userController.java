@@ -20,9 +20,9 @@ import com.ceasa.digital.Model.userModel;
 import com.ceasa.digital.services.httpResponses;
 import com.ceasa.digital.services.userService;
 
-
-@RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@RestController
+
 public class userController {
 
     @Autowired
