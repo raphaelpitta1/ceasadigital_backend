@@ -1,15 +1,15 @@
-package com.ceasa.digital.EnumsUsers;
+package com.ceasa.digital.Enums;
 
-public enum userTipoUsuarioEnum {
+public enum userTipoPessoaEnum {
     
-   Tipo_1("Hibrido"),
-   Tipo_2("Comprador"),
-   Tipo_3("Vendedor");
+   FISICA("FISICA"),
+   JURIDICA("JURIDICA"),
+   INVALIDA("INVALIDA");
 
    private String value;
 
 
-   userTipoUsuarioEnum(String value) {
+   userTipoPessoaEnum(String value) {
       this.value = value;
      
   }

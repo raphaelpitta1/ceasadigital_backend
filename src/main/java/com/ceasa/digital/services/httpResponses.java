@@ -1,5 +1,12 @@
 package com.ceasa.digital.services;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+
+
 public class httpResponses {
     
     private String message;
@@ -36,4 +43,14 @@ public class httpResponses {
     }
 
     
+   
+    public ResponseEntity<Object> responseProcess() {
+            
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("mensagem", this.message);
+        map.put("status", this.getStatusCode());
+       
+        
+        return ResponseEntity.status(this.getStatusCode()).body(map);
+    }
 }

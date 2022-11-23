@@ -1,15 +1,15 @@
-package com.ceasa.digital.EnumsUsers;
+package com.ceasa.digital.Enums;
 
-public enum userTipoPessoaEnum {
+public enum userStatusEnum {
     
-   FISICA("FISICA"),
-   JURIDICA("JURIDICA"),
-   INVALIDA("INVALIDA");
+   TRUE("true"),
+   FALSE("false");
 
+   
    private String value;
 
 
-   userTipoPessoaEnum(String value) {
+   userStatusEnum(String value) {
       this.value = value;
      
   }

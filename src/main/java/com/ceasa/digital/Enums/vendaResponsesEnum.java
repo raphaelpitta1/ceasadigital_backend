@@ -1,19 +1,21 @@
-package com.ceasa.digital.EnumsUsers;
+package com.ceasa.digital.Enums;
 
 import com.ceasa.digital.services.httpResponses;
 
-public enum userResponsesEnum {
-    uCadastrado(200,"Usuário Cadastrado com Sucesso"),
-    uJacadastrado(422,"Usuário já Possui Cadastro"), 
-    uProblem(503,"Erro ao Processar Ação. Tente mais tarde!"),
-    u_Nencontrado(422,"Usuário não encontrado"), 
-    uUpdate(200,"Usuário Atualizado com Sucesso"),
-    uDesativado(200, "Usuário Desativado com Sucesso");
+public enum vendaResponsesEnum {
+    vCadastrado(200,"Venda Cadastrada com Sucesso"),
+    vJacadastrado(422,"Venda já Existente"), 
+    vFraude(422,"Você não pode comprar seus prórios produtos"), 
+    vProblem(503,"Erro ao Processar Ação. Tente mais tarde!"),
+    v_Nencontrado(422,"Venda não encontrada"), 
+    qtd_indisponivel(422, "Quantidade Indisponível em estoque"),
+    vUpdate(200,"Venda Atualizada com Sucesso"),
+    vDesativado(200, "Venda Deletada com Sucesso");
 
     private final String message;
     private final int status_code;
 
-    userResponsesEnum(int status_code, String message) {
+    vendaResponsesEnum(int status_code, String message) {
         this.message = message;
         this.status_code = status_code;
     }

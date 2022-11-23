@@ -1,15 +1,15 @@
-package com.ceasa.digital.EnumsUsers;
+package com.ceasa.digital.Enums;
 
-public enum userStatusEnum {
+public enum userTipoUsuarioEnum {
     
-   ATIVO("true"),
-   DESATIVADO("false");
+   Tipo_1("Hibrido"),
+   Tipo_2("Comprador"),
+   Tipo_3("Vendedor");
 
-   
    private String value;
 
 
-   userStatusEnum(String value) {
+   userTipoUsuarioEnum(String value) {
       this.value = value;
      
   }

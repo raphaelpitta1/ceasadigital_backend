@@ -1,11 +1,15 @@
 package com.ceasa.digital.Model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 
@@ -22,18 +26,34 @@ public class userModel {
     private String sobrenome;
     @Column(length = 8)
     private String tipo_pessoa;
-    @NotBlank
+
     @Column(length = 16)
     private String documento;
     @Column(length = 20)
     private String senha;
     @Column(length = 11)
     private String telefone;
+ 
+    @Column(length = 8)
+    private String cep;
+
+    @Column(length = 50)
+    private String latitude;
+
+    @Column(length = 50)
+    private String longitude;
+
     @Column(length = 10)
     private String tipo_usuario;
-    private Boolean status;
 
+    private Boolean status = true;
 
+    @CreationTimestamp 
+    private Timestamp createDate;
+
+    
+    @UpdateTimestamp 
+    private Timestamp updateDate;
 
 
 
@@ -50,9 +70,10 @@ public class userModel {
     
 
 
+    // CADASTRO DE USUARIO
 
     public userModel(@NotBlank String nome, @NotBlank String sobrenome, String tipo_pessoa, @NotBlank String documento,
-            @NotBlank String senha, @NotBlank String telefone, String tipo_usuario, Boolean status) {
+            @NotBlank String senha, @NotBlank String telefone, String tipo_usuario, String cep, String latitude, String longitude, Boolean status) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.tipo_pessoa = tipo_pessoa;
@@ -61,43 +82,96 @@ public class userModel {
         this.telefone = telefone;
         this.tipo_usuario = tipo_usuario;
         this.status = status;
+        this.cep = cep;
+        this.latitude=latitude;
+        this.longitude=longitude;
     }
 
 
 
 
+    // CADASTRO DE USUARIO COM SENHA
 
-
-    public userModel(@NotBlank String nome, @NotBlank String sobrenome, @NotBlank String documento,
-            @NotBlank String senha, @NotBlank String telefone) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.documento = documento;
-        this.senha = senha;
-        this.telefone = telefone;
-    }
+   
 
 
 
 
-
+    // ATUALIZAÇÃO DE DADOS
 
     public userModel(@NotBlank String nome, @NotBlank String sobrenome, @NotBlank String documento,
-            @NotBlank String telefone) {
+            @NotBlank String telefone, String cep, String latitude, String longitude) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.documento = documento;
         this.telefone = telefone;
+        this.cep = cep;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
 
 
 
 
+
+
+
+// atualização de status
 
     public userModel(@NotBlank String documento, Boolean status) {
         this.documento = documento;
         this.status = status;
+    }
+
+
+
+
+
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+
+
+
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+
+
+
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+
+
+
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+
+
+
+
+    public String getCep() {
+        return cep;
+    }
+
+
+
+
+
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
 
@@ -186,6 +260,30 @@ public class userModel {
 
     public void setDocumento(String documento) {
         this.documento = documento;
+    }
+
+
+
+
+
+    public int getId() {
+        return id;
+    }
+
+
+
+
+
+    public Timestamp getCreateDate() {
+        return createDate;
+    }
+
+
+
+
+
+    public Timestamp getUpdateDate() {
+        return updateDate;
     }
 
    
