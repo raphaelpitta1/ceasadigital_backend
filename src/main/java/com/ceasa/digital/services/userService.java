@@ -68,6 +68,14 @@ public class userService {
 
     }
 
+    public Optional<userModel> recuperaUsuariobyDocumento(String documento) {
+
+        Optional<userModel> users = uRepository.findByDocumento(documento);
+
+        return users;
+
+    }
+
     public httpResponses atualizaUsuario(String nome, String sobrenome,String documento,
             String telefone, String cep, String latitude, String longitude) {
 
