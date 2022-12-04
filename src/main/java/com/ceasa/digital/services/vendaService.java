@@ -2,7 +2,6 @@ package com.ceasa.digital.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,15 +10,12 @@ import org.springframework.stereotype.Service;
 import com.ceasa.digital.Enums.vendaResponsesEnum;
 import com.ceasa.digital.Enums.negociacaoResponsesEnum;
 import com.ceasa.digital.Enums.vendaNegociacaoStatusEnum;
-import com.ceasa.digital.Enums.userStatusEnum;
-import com.ceasa.digital.Enums.userTipoPessoaEnum;
-import com.ceasa.digital.Enums.userTipoUsuarioEnum;
-import com.ceasa.digital.Model.negociacaoModel;
+
 import com.ceasa.digital.Model.ofertaModel;
-import com.ceasa.digital.Model.userModel;
+
 import com.ceasa.digital.Model.vendaModel;
 import com.ceasa.digital.Repository.ofertaRepository;
-import com.ceasa.digital.Repository.userRepository;
+
 import com.ceasa.digital.Repository.vendaRepository;
 
 @Service
