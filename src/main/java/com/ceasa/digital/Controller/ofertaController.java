@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ceasa.digital.Forms.atualizaQtdDisponivelOfertaForms;
-import com.ceasa.digital.Forms.atualizaVlUnMedidaOfertaForms;
+import com.ceasa.digital.Forms.atualizaOfertaForms;
+
 import com.ceasa.digital.Forms.cadastraOfertaForm;
 import com.ceasa.digital.Forms.encerraOfertaForm;
 import com.ceasa.digital.Model.ofertaModel;
@@ -47,7 +47,7 @@ public class ofertaController {
         return ResponseEntity.status(200).body(oService.recuperaOfertas());
     }
 
-    @GetMapping("/{idVendedor}")
+    @GetMapping("/vendedor/{idVendedor}")
     public ResponseEntity<List<Optional<ofertaModel>>> recuperaOfertasVendedor(@PathVariable int idVendedor){
 
         
@@ -63,7 +63,7 @@ public class ofertaController {
             httpResponses Response = oService.cadastrarOferta(oModel.getIdProduto(), oModel.getIdUnMedida(), oModel.getIdVendedor(), oModel.getQtdDisponivel(), oModel.getPesoUnMedida(), oModel.getVlUnMedida());
             
             return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+           
 
         }catch(Exception ex){
 
@@ -74,7 +74,7 @@ public class ofertaController {
     }
 
   
-    @PostMapping("/encerraOferta")
+    @PostMapping("/encerraoferta")
     public ResponseEntity<Object> encerraOfertas(@Validated @RequestBody encerraOfertaForm oModel){
 
 
@@ -82,49 +82,48 @@ public class ofertaController {
             httpResponses Response = oService.encerrarOferta(oModel.getId());
 
             return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
-        
-        }catch(Exception ex){
-        
-            return ResponseEntity.status(501).body(ex.getMessage());
-        
-        }
-
-
-    }
-
-    @PatchMapping("/quantidade")
-    public ResponseEntity<Object> atualizaQtdDisponivelOferta(@Validated @RequestBody atualizaQtdDisponivelOfertaForms oModel){
-
-
-        try{
-
-
-            httpResponses Response = oService.atualizarQtdDisponivelOferta(oModel.getId(), oModel.getQtd());
-
-            return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
-        
-        }catch(Exception ex){
-        
-            return ResponseEntity.status(501).body(ex.getMessage());
-        
-        }
-
-
-    }
-
-
-    @PatchMapping("/valorUnidade")
-    public ResponseEntity<Object> atualizaValorUnMedidaOfertas(@Validated @RequestBody atualizaVlUnMedidaOfertaForms oModel){
-
-
-        try{
-
             
-            httpResponses Response = oService.atualizarValorUnMedidaOferta(oModel.getId(), oModel.getVlUnMedida());
+        
+        }catch(Exception ex){
+        
+            return ResponseEntity.status(501).body(ex.getMessage());
+        
+        }
+
+
+    }
+
+    @PostMapping("/ativaroferta")
+    public ResponseEntity<Object> ativaroferta(@Validated @RequestBody encerraOfertaForm oModel){
+
+
+        try{
+            httpResponses Response = oService.ativarOferta(oModel.getId());
+
             return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+            
+        
+        }catch(Exception ex){
+        
+            return ResponseEntity.status(501).body(ex.getMessage());
+        
+        }
+
+
+    }
+
+   
+    @PatchMapping
+    public ResponseEntity<Object> atualizaOferta(@Validated @RequestBody atualizaOfertaForms oModel){
+
+
+        try{
+
+
+            httpResponses Response = oService.atualizarOferta(oModel);
+
+            return Response.responseProcess();
+            
         
         }catch(Exception ex){
         

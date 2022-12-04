@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ceasa.digital.Enums.ofertaResponsesEnum;
+import com.ceasa.digital.Forms.atualizaOfertaForms;
 import com.ceasa.digital.Model.ofertaModel;
 import com.ceasa.digital.Repository.ofertaRepository;
 
@@ -96,11 +97,19 @@ public class ofertaService {
                 return ofertaResponsesEnum.o_Nencontrado.getResponseObject();
 
             }
-            ofertaModel oModel = validaExistenciaOferta.get();
-            oModel.setStatus(false);
-            oRepository.save(oModel);
 
-            return ofertaResponsesEnum.oDesativado.getResponseObject();
+            if(validaExistenciaOferta.get().isStatus()){
+                ofertaModel oModel = validaExistenciaOferta.get();
+                oModel.setStatus(false);
+                oRepository.save(oModel);
+                return ofertaResponsesEnum.oDesativado.getResponseObject();
+    
+            }else{
+                return ofertaResponsesEnum.oJaDesativado.getResponseObject();
+
+            }
+           
+            
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -109,10 +118,10 @@ public class ofertaService {
         }
 
     }
-
-    public httpResponses atualizarQtdDisponivelOferta(int id,int qtdDisponivel) {
+    public httpResponses ativarOferta(int id) {
 
         try {
+
            
 
             Optional<ofertaModel> validaExistenciaOferta = oRepository.findById(id);
@@ -122,13 +131,19 @@ public class ofertaService {
                 return ofertaResponsesEnum.o_Nencontrado.getResponseObject();
 
             }
-            ofertaModel oModel = validaExistenciaOferta.get();
-            oModel.setQtdDisponivel(qtdDisponivel);
-     
 
-            oRepository.save(oModel);
+            if(!validaExistenciaOferta.get().isStatus()){
+                ofertaModel oModel = validaExistenciaOferta.get();
+                oModel.setStatus(true);
+                oRepository.save(oModel);
+                return ofertaResponsesEnum.oAtivada.getResponseObject();
+    
+            }else{
+                return ofertaResponsesEnum.oJaAtivada.getResponseObject();
 
-            return ofertaResponsesEnum.oUpdate.getResponseObject();
+            }
+           
+            
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -138,25 +153,36 @@ public class ofertaService {
 
     }
 
-    public httpResponses atualizarValorUnMedidaOferta(int id,float vlUnMedida) {
+    public httpResponses atualizarOferta(atualizaOfertaForms atualizaOfertaForms) {
 
         try {
            
 
-            Optional<ofertaModel> validaExistenciaOferta = oRepository.findById(id);
+            Optional<ofertaModel> validaExistenciaOferta = oRepository.findById(atualizaOfertaForms.getId());
 
             if (validaExistenciaOferta.isEmpty()) {
 
                 return ofertaResponsesEnum.o_Nencontrado.getResponseObject();
 
             }
-            ofertaModel oModel = validaExistenciaOferta.get();
-            oModel.setvlUnMedida(vlUnMedida);
-     
 
-            oRepository.save(oModel);
+            if(validaExistenciaOferta.get().isStatus()){
 
-            return ofertaResponsesEnum.oUpdate.getResponseObject();
+                ofertaModel oModel = validaExistenciaOferta.get();
+                oModel.setQtdDisponivel(atualizaOfertaForms.getQtd());
+                oModel.setvlUnMedida(atualizaOfertaForms.getVlUnMedida());
+         
+    
+                oRepository.save(oModel);
+    
+                return ofertaResponsesEnum.oUpdate.getResponseObject();
+            }else{
+
+                return ofertaResponsesEnum.oDesativadoAcao.getResponseObject();
+
+            }
+            
+           
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -165,5 +191,7 @@ public class ofertaService {
         }
 
     }
+
+   
 
 }

@@ -50,7 +50,7 @@ public class vendaController {
         return ResponseEntity.status(200).body(vService.recuperaVendas());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<vendaModel>> recuperarVendasId(@PathVariable int idVendedor){
+    public ResponseEntity<List<Optional<vendaModel>>> recuperarVendasId(@PathVariable int idVendedor){
 
         
 
@@ -59,14 +59,14 @@ public class vendaController {
     
 
     @GetMapping("/vendedor/{idVendedor}")
-    public ResponseEntity<Optional<vendaModel>> recuperarVendasVendedor(@PathVariable int idVendedor){
+    public ResponseEntity<List<Optional<vendaModel>>> recuperarVendasVendedor(@PathVariable int idVendedor){
 
         
 
         return ResponseEntity.status(200).body(vService.recuperaVendasVendedor(idVendedor));
     }
     @GetMapping("/comprador/{idComprador}")
-    public ResponseEntity<Optional<vendaModel>> recuperarVendasComprador(@PathVariable int idComprador){
+    public ResponseEntity<List<Optional<vendaModel>>> recuperarVendasComprador(@PathVariable int idComprador){
 
         
 

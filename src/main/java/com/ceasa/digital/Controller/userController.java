@@ -22,8 +22,10 @@ import com.ceasa.digital.Forms.atualizaSenhaUsuarioForm;
 import com.ceasa.digital.Forms.atualizaStatusUsuarioForm;
 import com.ceasa.digital.Forms.atualizaUsuarioForm;
 import com.ceasa.digital.Forms.cadastraUsuarioForm;
+import com.ceasa.digital.Forms.loginUsuarioForm;
 import com.ceasa.digital.Model.userModel;
 import com.ceasa.digital.services.httpResponses;
+import com.ceasa.digital.services.httpSimulaLoginResponses;
 import com.ceasa.digital.services.userService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -44,11 +46,20 @@ public class userController {
     }
 
     @GetMapping("/{documento}")
-    public ResponseEntity<Optional<userModel>> recuperaOfertasVendedor(@PathVariable String documento){
+    public ResponseEntity<Optional<userModel>> selectUsuariosDocumento(@PathVariable String documento){
 
         
 
         return ResponseEntity.status(200).body(uService.recuperaUsuariobyDocumento(documento));
+    }
+
+
+    @PostMapping("/login")
+    public httpSimulaLoginResponses Login(@Validated @RequestBody loginUsuarioForm lform){
+
+        httpSimulaLoginResponses response = uService.simulaLogin(lform.getDocumento(), lform.getSenha());
+
+        return response;
     }
     
     

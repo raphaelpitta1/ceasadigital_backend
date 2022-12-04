@@ -118,15 +118,15 @@ public class vendaService {
 
     }
 
-    public Optional<vendaModel>  recuperaVendasVendedor(int idVendedor) {
-        Optional<vendaModel> validaExistenciaVenda = vRepository.findByidVendedor(idVendedor);
+    public List<Optional<vendaModel>>  recuperaVendasVendedor(int idVendedor) {
+       List<Optional<vendaModel>> validaExistenciaVenda = vRepository.findByidVendedor(idVendedor);
        
 
         return validaExistenciaVenda;
 
     }
-    public Optional<vendaModel>  recuperaComprasComprador(int idComprador) {
-        Optional<vendaModel> validaExistenciaCompra = vRepository.findByidComprador(idComprador);
+    public List<Optional<vendaModel>>  recuperaComprasComprador(int idComprador) {
+        List<Optional<vendaModel>> validaExistenciaCompra = vRepository.findByidComprador(idComprador);
        
 
         return validaExistenciaCompra;

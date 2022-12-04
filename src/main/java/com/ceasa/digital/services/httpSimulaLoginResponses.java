@@ -7,20 +7,33 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 
-public class httpResponses {
+public class httpSimulaLoginResponses {
     
     private String message;
     private int statusCode;
-
+    private int idUsuario;
+    private String token;
 
     
-    public httpResponses(String message, int statusCode) {
-        this.message = message;
-        this.statusCode = statusCode;
+
+
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
 
-    public httpResponses() {
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+
+    public String getToken() {
+        return token;
+    }
+
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
 
@@ -44,16 +57,15 @@ public class httpResponses {
     }
 
     
-   
-    public ResponseEntity<Object> responseProcess() {
+    public ResponseEntity<Object> simulaLoginresponseProcess() {
             
         Map<String, Object> map = new HashMap<String, Object>();
+        map.put("idUsuario", this.idUsuario);
+        map.put("token", this.token);
         map.put("mensagem", this.message);
         map.put("status", this.getStatusCode());
        
         
         return ResponseEntity.status(this.getStatusCode()).body(map);
     }
-
-  
 }

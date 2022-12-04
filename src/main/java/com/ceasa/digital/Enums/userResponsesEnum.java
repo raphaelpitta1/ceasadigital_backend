@@ -9,6 +9,8 @@ public enum userResponsesEnum {
     u_Nencontrado(422,"Usuário não encontrado"), 
     uUpdate(200,"Usuário Atualizado com Sucesso"),
     uDesativado(200, "Usuário Desativado com Sucesso"),
+    uLogado(200, "Logado com sucesso"),
+    uSenhaIncorreta(422, "Senha incorreta"),
     uAtivado(200, "Usuário Ativado com Sucesso");
 
     private final String message;
@@ -33,5 +35,8 @@ public enum userResponsesEnum {
         hResponses.setStatusCode(getStatus_code());
         return hResponses;
     }
+
+
+    
     
 }

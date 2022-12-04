@@ -76,6 +76,36 @@ public class userService {
 
     }
 
+    public httpSimulaLoginResponses simulaLogin(String documento, String senha) {
+        httpSimulaLoginResponses loginResponses = new httpSimulaLoginResponses();
+        
+        Optional<userModel> users = uRepository.findByDocumento(documento);
+        if(users.isEmpty()){
+            loginResponses.setMessage(userResponsesEnum.u_Nencontrado.getMessage());
+            loginResponses.setStatusCode(userResponsesEnum.u_Nencontrado.getStatus_code());
+            return loginResponses;
+        }else{
+
+                if(users.get().getSenha().equals(senha)){
+                    loginResponses.setMessage(userResponsesEnum.uLogado.getMessage());
+                    loginResponses.setStatusCode(userResponsesEnum.uLogado.getStatus_code());
+                    loginResponses.setIdUsuario(users.get().getId());
+                    loginResponses.setToken("em desenvolvimento");
+                    return loginResponses;
+
+                }else{
+
+                    loginResponses.setMessage(userResponsesEnum.uSenhaIncorreta.getMessage());
+                    loginResponses.setStatusCode(userResponsesEnum.uSenhaIncorreta.getStatus_code());
+                        return loginResponses;
+
+
+                }
+            
+        }
+       
+    }
+
     public httpResponses atualizaUsuario(String nome, String sobrenome,String documento,
             String telefone, String cep, String latitude, String longitude) {
 
