@@ -7,8 +7,7 @@ public class cadastraUsuarioForm {
     @NotBlank(message = "Nome é um campo obrigatório")
     @Size(min = 3,max = 50,message = "O nome precisar ser entre 3 a 50 caracteres")
     private String nome;
-    @NotBlank(message = "Sobrenome é um campo obrigatório")
-    @Size(min = 3,max = 100,message = "O nome precisar ser entre 3 a 100 caracteres")
+
     private String sobrenome;
     @NotBlank(message = "Tipoe_pessoa é um campo obrigatório")
     @Size(max = 8,message = "Tipoe_pessoa precisa ter no máximo 8 caracteres")
@@ -31,7 +30,7 @@ public class cadastraUsuarioForm {
     private String longitude;
     public cadastraUsuarioForm(
             @NotBlank(message = "Nome é um campo obrigatório") @Size(min = 3, max = 50, message = "O nome precisar ser entre 3 a 50 caracteres") String nome,
-            @NotBlank(message = "Sobrenome é um campo obrigatório") @Size(min = 3, max = 100, message = "O nome precisar ser entre 3 a 100 caracteres") String sobrenome,
+            String sobrenome,
             @NotBlank(message = "Tipoe_pessoa é um campo obrigatório") @Size(max = 8, message = "Tipoe_pessoa precisa ter no máximo 8 caracteres") String tipo_pessoa,
             @NotBlank(message = "Documento é um campo obrigatório") @Size(min = 11, max = 15, message = "O documento precisa ter entre 11(CPF) a 15(CNPJ) caracteres") String documento,
             @NotBlank(message = "Senha é um campo obrigatório") @Size(min = 8, max = 20, message = "A senha precisa ter entre 8 a 20 caracteres") String senha,
