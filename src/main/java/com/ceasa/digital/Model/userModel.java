@@ -20,7 +20,7 @@ public class userModel {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(length = 50)
+    @Column(length = 255)
     private String nome;
     @Column(length = 100)
     private String sobrenome;

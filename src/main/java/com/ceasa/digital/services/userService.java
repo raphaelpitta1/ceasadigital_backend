@@ -19,6 +19,8 @@ public class userService {
 
     @Autowired
     private userRepository uRepository;
+    @Autowired
+    private whatasappService wService;
 
     public httpResponses cadastrarUsuario(String nome, String sobrenome, String tipo_pessoa, String documento,
             String senha,
@@ -47,7 +49,9 @@ public class userService {
                 return userResponsesEnum.uJacadastrado.getResponseObject();
 
             }
-
+            wService.setNumber("55"+telefone);
+            wService.setMessage("Ola, "+ nome +". \r\nEstamos muito felizes que se juntou ao Ceasa Digital :)\r\n\r\nSeja muito bem-vindo!\r\n\r\nAtenciosamente,\r\nEquipe Ceasa Digital 👋");
+            //wService.sendMessage();
             uRepository.save(uModel);
 
             return userResponsesEnum.uCadastrado.getResponseObject();
@@ -90,6 +94,7 @@ public class userService {
                     loginResponses.setMessage(userResponsesEnum.uLogado.getMessage());
                     loginResponses.setStatusCode(userResponsesEnum.uLogado.getStatus_code());
                     loginResponses.setIdUsuario(users.get().getId());
+                    loginResponses.setNome(users.get().getNome());
                     loginResponses.setToken("em desenvolvimento");
                     return loginResponses;
 

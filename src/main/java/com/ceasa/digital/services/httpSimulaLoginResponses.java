@@ -12,6 +12,7 @@ public class httpSimulaLoginResponses {
     private String message;
     private int statusCode;
     private int idUsuario;
+    private String nome;
     private String token;
 
     
