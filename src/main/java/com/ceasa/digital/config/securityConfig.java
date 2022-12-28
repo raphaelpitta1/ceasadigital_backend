@@ -33,13 +33,7 @@ public class securityConfig extends WebSecurityConfigurerAdapter{
 
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
-    @Bean
-    SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http
-            // ...
-            .cors(cors -> cors.disable());
-        return http.build();
-    }
+    
     @Bean
     public AuthenticationManager authenticationManager() throws Exception{
 
