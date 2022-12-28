@@ -7,7 +7,7 @@ public class unMedidaForm {
 
     
     @NotBlank(message = "Nome é um campo obrigatório para cadastrar uma nova unidae de medida")
-    @Size(min = 3,max = 50,message = "O Nome precisa ter entre 3 e 50 caracteres")
+    @Size(min = 2,max = 50,message = "O Nome precisa ter entre 2 e 50 caracteres")
     private String nome;
 
     public unMedidaForm(

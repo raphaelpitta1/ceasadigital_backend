@@ -54,16 +54,9 @@ public class userController {
     }
 
 
-    @PostMapping("/login")
-    public httpSimulaLoginResponses Login(@Validated @RequestBody loginUsuarioForm lform){
-
-        httpSimulaLoginResponses response = uService.simulaLogin(lform.getDocumento(), lform.getSenha());
-
-        return response;
-    }
+   
     
-    
-    @PostMapping
+    @PostMapping("/cadastro")
     public ResponseEntity<Object> cadastraUsuario(@Validated @RequestBody cadastraUsuarioForm umModel){
 
         try{

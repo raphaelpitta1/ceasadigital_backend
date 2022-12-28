@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.ceasa.digital.Enums.userResponsesEnum;
@@ -15,12 +18,14 @@ import com.ceasa.digital.Model.userModel;
 import com.ceasa.digital.Repository.userRepository;
 
 @Service
-public class userService {
+public class userService implements UserDetailsService {
 
     @Autowired
     private userRepository uRepository;
     @Autowired
     private whatasappService wService;
+   
+    
 
     public httpResponses cadastrarUsuario(String nome, String sobrenome, String tipo_pessoa, String documento,
             String senha,
@@ -28,6 +33,8 @@ public class userService {
 
         try {
 
+           encryptService eService = new encryptService();
+            
             userModel uModel = new userModel();
 
             uModel.setNome(nome);
@@ -80,36 +87,7 @@ public class userService {
 
     }
 
-    public httpSimulaLoginResponses simulaLogin(String documento, String senha) {
-        httpSimulaLoginResponses loginResponses = new httpSimulaLoginResponses();
-        
-        Optional<userModel> users = uRepository.findByDocumento(documento);
-        if(users.isEmpty()){
-            loginResponses.setMessage(userResponsesEnum.u_Nencontrado.getMessage());
-            loginResponses.setStatusCode(userResponsesEnum.u_Nencontrado.getStatus_code());
-            return loginResponses;
-        }else{
-
-                if(users.get().getSenha().equals(senha)){
-                    loginResponses.setMessage(userResponsesEnum.uLogado.getMessage());
-                    loginResponses.setStatusCode(userResponsesEnum.uLogado.getStatus_code());
-                    loginResponses.setIdUsuario(users.get().getId());
-                    loginResponses.setNome(users.get().getNome());
-                    loginResponses.setToken("em desenvolvimento");
-                    return loginResponses;
-
-                }else{
-
-                    loginResponses.setMessage(userResponsesEnum.uSenhaIncorreta.getMessage());
-                    loginResponses.setStatusCode(userResponsesEnum.uSenhaIncorreta.getStatus_code());
-                        return loginResponses;
-
-
-                }
-            
-        }
-       
-    }
+    
 
     public httpResponses atualizaUsuario(String nome, String sobrenome,String documento,
             String telefone, String cep, String latitude, String longitude) {
@@ -190,5 +168,15 @@ public class userService {
 
             return userResponsesEnum.uProblem.getResponseObject();
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String documento) throws UsernameNotFoundException {
+        userModel users = uRepository.findByDocumento(documento).orElseThrow(()-> new UsernameNotFoundException("Login Inválido"));
+      
+       
+        return User.builder().username(documento).password(users.getSenha()).roles("USER").build();
+
+        
     }
 }

@@ -39,10 +39,10 @@ public class negociacaoService {
     }
 
 
-    public negociacaoModel recuperaNegociacao(int idVenda){
-
-
-        return recuperaNegociacao(idVenda);
+    public Optional<negociacaoModel> recuperaNegociacao(int idVenda){
+       
+       
+        return nRepository.findById(idVenda);
 
     }
 
@@ -60,9 +60,9 @@ public class negociacaoService {
             objVenda = validaExistenciaVenda.get();
             objNegociacao = verificaNegociacao.get();
 
-            if(!verificaNegociacao.get().getStatusNegociacao().equals(vendaNegociacaoStatusEnum.EM_ANDAMENTO.getValue())){
+            if(!verificaNegociacao.get().getstatusNegociacao().equals(vendaNegociacaoStatusEnum.EM_ANDAMENTO.getValue())){
 
-                if(verificaNegociacao.get().getStatusNegociacao().equals(vendaNegociacaoStatusEnum.CANCELADO.getValue())){
+                if(verificaNegociacao.get().getstatusNegociacao().equals(vendaNegociacaoStatusEnum.CANCELADO.getValue())){
 
                     return negociacaoResponsesEnum.nCancelado.getResponseObject();
                 }else{
@@ -145,13 +145,13 @@ public class negociacaoService {
                 return negociacaoResponsesEnum.n_Nencontrado.getResponseObject();
             }
            
-            if(nRepository.findByidVenda(idVenda).get().getStatusNegociacao().equalsIgnoreCase(vendaNegociacaoStatusEnum.CANCELADO.getValue())){
+            if(nRepository.findByidVenda(idVenda).get().getstatusNegociacao().equalsIgnoreCase(vendaNegociacaoStatusEnum.CANCELADO.getValue())){
         
 
                 return negociacaoResponsesEnum.nCancelado.getResponseObject();
          }
 
-            if(nRepository.findByidVenda(idVenda).get().getStatusNegociacao().equalsIgnoreCase(vendaNegociacaoStatusEnum.CONCLUIDO.getValue())){
+            if(nRepository.findByidVenda(idVenda).get().getstatusNegociacao().equalsIgnoreCase(vendaNegociacaoStatusEnum.CONCLUIDO.getValue())){
 
                return negociacaoResponsesEnum.nJaConcluida.getResponseObject();
 
@@ -183,9 +183,9 @@ public class negociacaoService {
                     objVenda = validaExistenciaVenda.get();
                     objNegociacao = verificaNegociacao.get();
         
-                    if(!verificaNegociacao.get().getStatusNegociacao().equals(vendaNegociacaoStatusEnum.EM_ANDAMENTO.getValue())){
+                    if(!verificaNegociacao.get().getstatusNegociacao().equals(vendaNegociacaoStatusEnum.EM_ANDAMENTO.getValue())){
         
-                        if(verificaNegociacao.get().getStatusNegociacao().equals(vendaNegociacaoStatusEnum.CANCELADO.getValue())){
+                        if(verificaNegociacao.get().getstatusNegociacao().equals(vendaNegociacaoStatusEnum.CANCELADO.getValue())){
         
                             return negociacaoResponsesEnum.nCancelado.getResponseObject();
                         }else{
@@ -237,7 +237,7 @@ public class negociacaoService {
                             
                             nRepository.save(verificaNegociacao.get());
                             
-                            return negociacaoResponsesEnum.nDesativadoPendenteComprador.getResponseObject();
+                            return negociacaoResponsesEnum.nConcluidaPendenteComprador.getResponseObject();
                         }
         
         
@@ -269,13 +269,13 @@ public class negociacaoService {
                         return negociacaoResponsesEnum.n_Nencontrado.getResponseObject();
                     }
                    
-                    if(nRepository.findByidVenda(idVenda).get().getStatusNegociacao().equalsIgnoreCase(vendaNegociacaoStatusEnum.CANCELADO.getValue())){
+                    if(nRepository.findByidVenda(idVenda).get().getstatusNegociacao().equalsIgnoreCase(vendaNegociacaoStatusEnum.CANCELADO.getValue())){
                 
         
                         return negociacaoResponsesEnum.nCancelado.getResponseObject();
                  }
         
-                    if(nRepository.findByidVenda(idVenda).get().getStatusNegociacao().equalsIgnoreCase(vendaNegociacaoStatusEnum.CONCLUIDO.getValue())){
+                    if(nRepository.findByidVenda(idVenda).get().getstatusNegociacao().equalsIgnoreCase(vendaNegociacaoStatusEnum.CONCLUIDO.getValue())){
         
                        return negociacaoResponsesEnum.nJaConcluida.getResponseObject();
         

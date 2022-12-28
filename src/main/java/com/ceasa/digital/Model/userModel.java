@@ -29,7 +29,7 @@ public class userModel {
 
     @Column(length = 16)
     private String documento;
-    @Column(length = 20)
+    @Column(length = 255)
     private String senha;
     @Column(length = 11)
     private String telefone;
