@@ -20,6 +20,7 @@ public class resourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception{
         http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/oauth/token").permitAll();        
+        
         http.authorizeRequests().antMatchers("/api/usuarios/cadastro").permitAll();
         http.authorizeRequests().antMatchers("/api/**").authenticated();
         
