@@ -2,6 +2,7 @@ package com.ceasa.digital.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,24 +19,13 @@ public class resourceServerConfig extends ResourceServerConfigurerAdapter {
     
     @Override
     public void configure(HttpSecurity http) throws Exception{
-        http.cors().disable();
+        http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/oauth/token").permitAll();        
         http.authorizeRequests().antMatchers("/api/usuarios/cadastro").permitAll();
         http.authorizeRequests().antMatchers("/api/**").authenticated();
         
 
     }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration configuration = new CorsConfiguration();
-    configuration.addAllowedOrigin("*");
-    configuration.addAllowedHeader("*");
-    configuration.addAllowedMethod("*");
-    configuration.setAllowCredentials(true);
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", configuration);
-    return source;
-}
 
 
 }
