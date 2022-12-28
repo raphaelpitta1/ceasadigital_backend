@@ -61,11 +61,4 @@ public class authorizationServerConfig extends AuthorizationServerConfigurerAdap
 
         
 }
-@Bean
-SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-	http
-		// ...
-		.cors(cors -> cors.disable());
-	return http.build();
-}
 }
