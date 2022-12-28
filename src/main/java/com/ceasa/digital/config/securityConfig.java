@@ -13,11 +13,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.ceasa.digital.services.userService;
 
 
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @EnableWebSecurity
 public class securityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
@@ -48,4 +52,15 @@ public class securityConfig extends WebSecurityConfigurerAdapter{
        
         return NoOpPasswordEncoder.getInstance();
     }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("*");
+            }
+        };
+    }
+        
 }

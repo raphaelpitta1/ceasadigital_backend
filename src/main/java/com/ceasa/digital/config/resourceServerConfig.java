@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Configuration
 @EnableResourceServer
@@ -17,6 +18,7 @@ public class resourceServerConfig extends ResourceServerConfigurerAdapter {
        
         http.authorizeRequests().antMatchers("/api/usuarios/cadastro").permitAll();
         http.authorizeRequests().antMatchers("/api/**").authenticated();
+        
 
     }
 
