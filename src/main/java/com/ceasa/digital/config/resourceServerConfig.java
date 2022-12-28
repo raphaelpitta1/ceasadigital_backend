@@ -25,6 +25,7 @@ public class resourceServerConfig extends ResourceServerConfigurerAdapter {
         .and().csrf().disable();        
         
         http.authorizeRequests().antMatchers("/api/usuarios/cadastro").permitAll();
+        http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers("/api/**").authenticated();
         
 
