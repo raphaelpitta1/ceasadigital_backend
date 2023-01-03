@@ -67,6 +67,13 @@ public class userController {
         return ResponseEntity.status(200).body(uService.recuperaUsuariobyDocumento(documento));
     }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Optional<userModel>> selectUsuariosbyId(@PathVariable int id){
+
+
+        return ResponseEntity.status(200).body(uService.recuperaUsuariobyId(id));
+    }
+
 
    
     @PostMapping("/cadastro")

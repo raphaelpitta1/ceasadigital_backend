@@ -88,6 +88,15 @@ public class userService implements UserDetailsService {
     }
 
     
+    public Optional<userModel> recuperaUsuariobyId(int id) {
+
+        Optional<userModel> users = uRepository.findById(id);
+
+        return users;
+
+    }
+
+    
 
     public httpResponses atualizaUsuario(String nome, String sobrenome,String documento,
             String telefone, String cep, String latitude, String longitude) {
