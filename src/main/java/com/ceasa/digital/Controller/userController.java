@@ -41,7 +41,6 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
-
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("api/usuarios")
@@ -50,101 +49,92 @@ public class userController {
     @Autowired
     userService uService;
 
-
     @GetMapping
-    public ResponseEntity<List<userModel>> selectUsuarios(){
-
-        
+    public ResponseEntity<List<userModel>> selectUsuarios() {
 
         return ResponseEntity.status(200).body(uService.recuperaUsuarios());
     }
 
     @GetMapping("/{documento}")
-    public ResponseEntity<Optional<userModel>> selectUsuariosDocumento(@PathVariable String documento){
-
-        
+    public ResponseEntity<Optional<userModel>> selectUsuariosDocumento(@PathVariable String documento) {
 
         return ResponseEntity.status(200).body(uService.recuperaUsuariobyDocumento(documento));
     }
 
-
-   
     @PostMapping("/cadastro")
-    public ResponseEntity<Object> cadastraUsuario(@Validated @RequestBody cadastraUsuarioForm umModel){
+    public ResponseEntity<Object> cadastraUsuario(@Validated @RequestBody cadastraUsuarioForm umModel) {
 
-        try{
-            
-          httpResponses Response = uService.cadastrarUsuario(umModel.getNome(), umModel.getSobrenome(), umModel.getTipo_pessoa().toString(), umModel.getDocumento(),umModel.getSenha(), umModel.getTelefone(), umModel.getCep(), umModel.getLatitude(), umModel.getLongitude());
-           
-          return Response.responseProcess();
-          //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+        try {
 
-        }catch(Exception ex){
+            httpResponses Response = uService.cadastrarUsuario(umModel.getNome(), umModel.getSobrenome(),
+                    umModel.getTipo_pessoa().toString(), umModel.getDocumento(), umModel.getSenha(),
+                    umModel.getTelefone(), umModel.getCep(), umModel.getLatitude(), umModel.getLongitude());
+
+            return Response.responseProcess();
+            // return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+
+        } catch (Exception ex) {
 
             return ResponseEntity.status(501).body(ex.getMessage());
         }
 
- 
     }
 
     @PatchMapping
     public ResponseEntity<Object> atualizaUsuario(@Validated @RequestBody atualizaUsuarioForm umModel) {
 
-try{
-    httpResponses Response = uService.atualizaUsuario(umModel.getNome(), umModel.getSobrenome(), umModel.getDocumento(),umModel.getTelefone(), umModel.getCep(), umModel.getLatitude(), umModel.getLongitude());
-    
-    
-    return Response.responseProcess();
-   // return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+        try {
+            httpResponses Response = uService.atualizaUsuario(umModel.getNome(), umModel.getSobrenome(),
+                    umModel.getDocumento(), umModel.getTelefone(), umModel.getCep(), umModel.getLatitude(),
+                    umModel.getLongitude());
 
-}catch(Exception ex){
+            return Response.responseProcess();
+            // return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
 
-    return ResponseEntity.status(501).body(ex.getMessage());
+        } catch (Exception ex) {
 
-}
-      
+            return ResponseEntity.status(501).body(ex.getMessage());
+
+        }
+
     }
 
     @PatchMapping("/status")
-    public ResponseEntity<Object> mudarstatus(@Validated @RequestBody atualizaStatusUsuarioForm umModel){
+    public ResponseEntity<Object> mudarstatus(@Validated @RequestBody atualizaStatusUsuarioForm umModel) {
 
-
-        try{
+        try {
             httpResponses Response = uService.mudarStatusUsuario(umModel.getDocumento(), umModel.isStatus());
 
             return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
-        
-        }catch(Exception ex){
-        
+            // return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+
+        } catch (Exception ex) {
+
             return ResponseEntity.status(501).body(ex.getMessage());
-        
+
         }
 
-
     }
-    
-
 
     @PatchMapping("api/usuarios/esqueciminhasenha")
-    public ResponseEntity<Object> atualizaSenha(@Validated @RequestBody atualizaSenhaUsuarioForm umModel){
+    public ResponseEntity<Object> atualizaSenha(@Validated @RequestBody atualizaSenhaUsuarioForm umModel) {
 
+        try {
+            httpResponses Response = uService.autalizaSenha(umModel.getDocumento(), umModel.getSenha());
 
-    try{
-        httpResponses Response = uService.autalizaSenha(umModel.getDocumento(), umModel.getSenha());
+            return Response.responseProcess();
+            // return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
 
-        return Response.responseProcess();
-        //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
-    
-    }catch(Exception ex){
-    
-        return ResponseEntity.status(501).body(ex.getMessage());
-    
+        } catch (Exception ex) {
+
+            return ResponseEntity.status(501).body(ex.getMessage());
+
+        }
+
     }
 
-
 }
-
-}
-
-

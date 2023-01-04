@@ -2,11 +2,11 @@ package com.ceasa.digital.Enums;
 
 public enum negociacaoSubStatusEnum {
     
-   AGUARDANDO_APROVACAO_Vendedor_CANCELAMENTO("Aguardando Vendedor Aprovar Cancelamento"),
-   AGUARDANDO_APROVACAO_Comprador_CANCELAMENTO("Aguardando Comprador Aprovar Cancelamento"),
-   AGUARDANDO_APROVACAO_CONCLUSAO_Vendedor("Aguardando Vendedor Aprovar Conclusao"),
-   AGUARDANDO_APROVACAO_CONCLUSAO_Comprador("Aguardando Comprador Aprovar Conclusao"),
-   AGUARDANDO_APROVACAO_ALTERACAO("Aguardando Aprovacao Alteracao Peso"),
+   AGUARDANDO_APROVACAO_Vendedor_CANCELAMENTO("Aguardando vendedor aprovar cancelamento"),
+   AGUARDANDO_APROVACAO_Comprador_CANCELAMENTO("Aguardando comprador aprovar cancelamento"),
+   AGUARDANDO_APROVACAO_CONCLUSAO_Vendedor("Aguardando vendedor aprovar conclusão"),
+   AGUARDANDO_APROVACAO_CONCLUSAO_Comprador("Aguardando comprador aprovar conclusão"),
+   AGUARDANDO_APROVACAO_ALTERACAO("Aguardando aprovação da alteração de peso"),
    CONCLUIDO("CONCLUIDO"),
    CANCELADO("CANCELADO");
 

@@ -18,13 +18,14 @@ public class produtoService {
     @Autowired
     private produtoRepository pRepository;
 
-    public httpResponses cadastrarProduto(String nome) {
+    public httpResponses cadastrarProduto(String nome, String categoria) {
 
         try {
 
             produtoModel pModel = new produtoModel();
 
             pModel.setNome(nome);
+            pModel.setCategoria(categoria);
 
             Optional<produtoModel> validaExistenciaProduto = pRepository.findByNome(pModel.getNome().toString());
 

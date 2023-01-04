@@ -1,6 +1,5 @@
 package com.ceasa.digital.Controller;
 
-
 import java.util.List;
 
 import javax.validation.Valid;
@@ -25,7 +24,6 @@ import com.ceasa.digital.Model.produtoModel;
 import com.ceasa.digital.services.httpResponses;
 import com.ceasa.digital.services.produtoService;
 
-
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("api/produtos")
@@ -34,66 +32,60 @@ public class produtoController {
     @Autowired
     produtoService pService;
 
-
     @GetMapping
-    public ResponseEntity<List<produtoModel>> selectProdutos(){
-
-        
+    public ResponseEntity<List<produtoModel>> selectProdutos() {
 
         return ResponseEntity.status(200).body(pService.recuperaProdutos());
     }
-    
+
     @PostMapping
-    public ResponseEntity<Object> cadastraProduto(@Valid @RequestBody produtoForm umModel){
+    public ResponseEntity<Object> cadastraProduto(@Valid @RequestBody produtoForm umModel) {
 
-        try{
-            
-            httpResponses Response = pService.cadastrarProduto(umModel.getNome());
+        try {
+
+            httpResponses Response = pService.cadastrarProduto(umModel.getNome(), umModel.getCategoria());
             return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+            // return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
 
             return ResponseEntity.status(501).body(ex.getMessage());
         }
 
- 
     }
 
-  
     @DeleteMapping
-    public ResponseEntity<Object> deleteProduto(@Validated @RequestBody produtoForm umModel){
+    public ResponseEntity<Object> deleteProduto(@Validated @RequestBody produtoForm umModel) {
 
-
-        try{
+        try {
             httpResponses Response = pService.deletarProduto(umModel.getNome());
             return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
-        
-        }catch(Exception ex){
-        
-            return ResponseEntity.status(501).body(ex.getMessage());
-        
-        }
+            // return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
 
+        } catch (Exception ex) {
+
+            return ResponseEntity.status(501).body(ex.getMessage());
+
+        }
 
     }
 
     @PatchMapping
-    public ResponseEntity<Object> atualizaProduto(@Validated @RequestBody produtoForm umModel){
+    public ResponseEntity<Object> atualizaProduto(@Validated @RequestBody produtoForm umModel) {
 
-
-        try{
+        try {
             httpResponses Response = pService.atualizarProduto(umModel.getNome());
             return Response.responseProcess();
-            // /return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
-        
-        }catch(Exception ex){
-        
-            return ResponseEntity.status(501).body(ex.getMessage());
-        
-        }
+            // /return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
 
+        } catch (Exception ex) {
+
+            return ResponseEntity.status(501).body(ex.getMessage());
+
+        }
 
     }
 }
