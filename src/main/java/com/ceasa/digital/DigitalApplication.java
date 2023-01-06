@@ -20,6 +20,7 @@ public class DigitalApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/api/usuarios/*").allowedOrigins("*");
+
 			}
 		};
 	}
