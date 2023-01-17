@@ -1,9 +1,11 @@
 package com.ceasa.digital.services;
 
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +26,10 @@ public class userService implements UserDetailsService {
     private userRepository uRepository;
     @Autowired
     private whatasappService wService;
-   
+    @Value("${phone.prefix}")
+    private String phonePrefix;
+    @Value("${app.link}")
+    private URL appLink;
     
 
     public httpResponses cadastrarUsuario(String nome, String sobrenome, String tipo_pessoa, String documento,
@@ -33,7 +38,7 @@ public class userService implements UserDetailsService {
 
         try {
 
-           encryptService eService = new encryptService();
+           
             
             userModel uModel = new userModel();
 
@@ -48,7 +53,7 @@ public class userService implements UserDetailsService {
             uModel.setCep(cep);
             uModel.setLatitude(latitude);
             uModel.setLongitude(longitude);
-
+                System.out.println(phonePrefix);
             Optional<userModel> validaExistenciaPessoa = uRepository.findByDocumento(uModel.getDocumento().toString());
 
             if (!validaExistenciaPessoa.isEmpty()) {
@@ -56,9 +61,12 @@ public class userService implements UserDetailsService {
                 return userResponsesEnum.uJacadastrado.getResponseObject();
 
             }
-            wService.setNumber("55"+telefone);
-            wService.setMessage("Ola, "+ nome +". \r\nEstamos muito felizes que se juntou ao Ceasa Digital :)\r\n\r\nSeja muito bem-vindo!\r\n\r\nAtenciosamente,\r\nEquipe Ceasa Digital 👋");
-            //wService.sendMessage();
+            String message = "Ola, "+ nome +". \r\nEstamos muito felizes que se juntou ao Ceasa Digital :)\r\n\r\nSeja muito bem-vindo!\r\n\r\nAtenciosamente,\r\n*Equipe Ceasa Digital*"; 
+            
+          
+            wService.setNumber(phonePrefix+telefone);
+            wService.setMessage(message);
+            wService.sendMessage();
             uRepository.save(uModel);
 
             return userResponsesEnum.uCadastrado.getResponseObject();
@@ -155,19 +163,22 @@ public class userService implements UserDetailsService {
         }
     }
 
-    public httpResponses autalizaSenha(String documento, String senha) {
+    public httpResponses recuperaSenha(String documento, String telefone) {
 
         try {
 
             Optional<userModel> atualizaStatusPessoa = uRepository.findByDocumento(documento);
 
-            if (!atualizaStatusPessoa.isEmpty()) {
+            if (!atualizaStatusPessoa.isEmpty() && atualizaStatusPessoa.get().getTelefone().equals(telefone) ) {
 
-                atualizaStatusPessoa.get().setSenha(senha);
-                ;
-                uRepository.save(atualizaStatusPessoa.get());
+                String message = "Ola, "+ atualizaStatusPessoa.get().getNome().toString() +". \r\nSegue sua senha de acesso: *"+atualizaStatusPessoa.get().getSenha().toString()+"* :)\r\n\r\n*Link do Aplicativo:*"+appLink+"\r\n\r\n\r\n\r\nAtenciosamente,\r\n*Equipe Ceasa Digital*"; 
+            
+          
+                wService.setNumber(phonePrefix+atualizaStatusPessoa.get().getTelefone());
+                wService.setMessage(message);
+                wService.sendMessage();
 
-                return userResponsesEnum.uUpdate.getResponseObject();
+                return userResponsesEnum.uWhatsSenhaUpdate.getResponseObject();
             } else {
 
                 return userResponsesEnum.u_Nencontrado.getResponseObject();

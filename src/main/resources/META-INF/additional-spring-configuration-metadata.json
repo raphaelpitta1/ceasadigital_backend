@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "phone.prefix",
+  "type": "java.lang.String",
+  "description": "A description for 'phone.prefix'"
+}]}

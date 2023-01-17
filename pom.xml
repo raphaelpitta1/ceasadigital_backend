@@ -60,6 +60,12 @@
     <artifactId>unirest-java</artifactId>
     <version>1.4.9</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/com.google.firebase/firebase-admin -->
+<dependency>
+    <groupId>com.google.firebase</groupId>
+    <artifactId>firebase-admin</artifactId>
+    <version>9.1.1</version>
+</dependency>
 
 
 <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
@@ -69,7 +75,11 @@
     <version>2.5.2.RELEASE</version>
 </dependency>
 
-
+<dependency>
+	<groupId>com.vdurmont</groupId>
+	<artifactId>emoji-java</artifactId>
+	<version>5.1.1</version>
+</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

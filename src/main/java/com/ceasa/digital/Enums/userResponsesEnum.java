@@ -8,6 +8,7 @@ public enum userResponsesEnum {
     uProblem(503,"Erro ao Processar Ação. Tente mais tarde!"),
     u_Nencontrado(422,"Usuário não encontrado"), 
     uUpdate(200,"Usuário Atualizado com Sucesso"),
+    uWhatsSenhaUpdate(200,"Caso os seus dados estejam corretos, você receberá uma mensagem em seu whatsapp com a senha de acesso"),
     uDesativado(200, "Usuário Desativado com Sucesso"),
     uLogado(200, "Logado com sucesso"),
     uSenhaIncorreta(422, "Senha incorreta"),

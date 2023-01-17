@@ -56,7 +56,7 @@ public class whatasappService {
 
     public void sendMessage(){
 
-        HttpPost post = new HttpPost("http://localhost:3000/send-text");
+        HttpPost post = new HttpPost("http://localhost:3000/whatsapp/send-text");
 
         // add request parameter, form parameters
         List<NameValuePair> urlParameters = new ArrayList<>();

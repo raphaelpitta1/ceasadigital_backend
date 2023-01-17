@@ -127,26 +127,5 @@ public class vendaController {
 
  
     }
-    /* 
-    @PatchMapping("/valorUnidade")
-    public ResponseEntity<Object> atualizaValorUnMedidaOfertas(@Validated @RequestBody atualizaVlUnMedidaOfertaForms oModel){
-
-
-        try{
-
-            
-            httpResponses Response = vService.atualizarValorUnMedidaOferta(oModel.getId(), oModel.getVlUnMedida());
-            return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
-        
-        }catch(Exception ex){
-        
-            return ResponseEntity.status(501).body(ex.getMessage());
-        
-        }
-
-
-    }
-
-*/
+ 
 }

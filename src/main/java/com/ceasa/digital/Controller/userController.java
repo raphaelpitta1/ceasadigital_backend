@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.http.client.methods.HttpPost;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -37,6 +37,7 @@ import com.ceasa.digital.Model.userModel;
 import com.ceasa.digital.services.httpResponses;
 import com.ceasa.digital.services.httpSimulaLoginResponses;
 import com.ceasa.digital.services.userService;
+import com.google.api.client.util.Value;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -58,6 +59,7 @@ public class userController {
     @GetMapping("/{documento}")
     public ResponseEntity<Optional<userModel>> selectUsuariosDocumento(@PathVariable String documento) {
 
+        
         return ResponseEntity.status(200).body(uService.recuperaUsuariobyDocumento(documento));
     }
 
@@ -71,7 +73,7 @@ public class userController {
     public ResponseEntity<Object> cadastraUsuario(@Validated @RequestBody cadastraUsuarioForm umModel) {
 
         try {
-
+    
             httpResponses Response = uService.cadastrarUsuario(umModel.getNome(), umModel.getSobrenome(),
                     umModel.getTipo_pessoa().toString(), umModel.getDocumento(), umModel.getSenha(),
                     umModel.getTelefone(), umModel.getCep(), umModel.getLatitude(), umModel.getLongitude());
@@ -125,15 +127,14 @@ public class userController {
 
     }
 
-    @PatchMapping("api/usuarios/esqueciminhasenha")
-    public ResponseEntity<Object> atualizaSenha(@Validated @RequestBody atualizaSenhaUsuarioForm umModel) {
+    @PostMapping("/recuperasenha")
+    public ResponseEntity<Object> recuperasenha(@Validated @RequestBody atualizaSenhaUsuarioForm umModel) {
 
         try {
-            httpResponses Response = uService.autalizaSenha(umModel.getDocumento(), umModel.getSenha());
+            httpResponses Response = uService.recuperaSenha(umModel.getDocumento(), umModel.gettelefone());
 
             return Response.responseProcess();
-            // return
-            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+
 
         } catch (Exception ex) {
 
