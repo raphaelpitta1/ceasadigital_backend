@@ -23,7 +23,7 @@ public interface userAdressRepository extends JpaRepository<userAdressModel,Inte
 
     List<Optional<userAdressModel>> findByidUsuario(int idUsuario);
 
-    Optional<userAdressModel> findByidUsuarioAndNumeroAndCep(int idUsuario, int numero, String cep);
+    List<Optional<userAdressModel>> findByidUsuarioAndNumeroAndCep(int idUsuario, int numero, String cep);
 
 
     @Query("select distinct a from Enderecos a, Oferta b where a.idUsuario = b.idVendedor")

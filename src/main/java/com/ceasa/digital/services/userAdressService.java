@@ -37,15 +37,14 @@ public class userAdressService {
         
 
         
-            Optional<userAdressModel> validaExistenciaEndereco = uRepository.findByidUsuarioAndNumeroAndCep(user.getId(), user.getNumero(), user.getCep());
+            
 
-
-            if (!validaExistenciaEndereco.isEmpty()) {
+            if (!uRepository.findByidUsuarioAndNumeroAndCep(user.getId(), user.getNumero(), user.getCep()).isEmpty()) {
 
                 return userResponsesEnum.eJacadastrado.getResponseObject();
 
             }
-           
+            
             uRepository.save(user);
 
             return userResponsesEnum.eCadastrado.getResponseObject();
@@ -59,10 +58,18 @@ public class userAdressService {
     }
 
     public Optional<userAdressModel> recuperaEnderecoByIdUsuario(int idUsuario) {
+    
+    List<Optional<userAdressModel>> users = uRepository.findByidUsuario(idUsuario);
 
-    Optional<userAdressModel> users = uRepository.findByidUsuario(idUsuario).get(0);
+    if(users.isEmpty()){
 
-        return users;
+        return null;
+    }else{
+
+
+        return users.get(0);
+    }
+        
 
     }
 
@@ -82,9 +89,9 @@ public class userAdressService {
 
         try {
 
-            Optional<userAdressModel> atualizaEndereco = uRepository.findByidUsuarioAndNumeroAndCep(uModel.getIdUsuario(),uModel.getNumero(), uModel.getCep());
-            if (!atualizaEndereco.isEmpty()) {
+            if (!uRepository.findByidUsuarioAndNumeroAndCep(uModel.getIdUsuario(),uModel.getNumero(), uModel.getCep()).isEmpty()) {
 
+                Optional<userAdressModel> atualizaEndereco = uRepository.findByidUsuarioAndNumeroAndCep(uModel.getIdUsuario(),uModel.getNumero(), uModel.getCep()).get(0);
                 atualizaEndereco.get().setBairro(uModel.getBairro());
                 atualizaEndereco.get().setCep(uModel.getCep());
                 atualizaEndereco.get().setCidade(uModel.getCidade());
