@@ -51,8 +51,8 @@ public class userAdressModel {
     @Column(length = 50)
     private String longitude;
     @Range(min = 1)
-    @Column(length = 50)
-    private String radius;
+  
+    private int radius;
 
     private Boolean status = true;
 
@@ -79,7 +79,7 @@ public class userAdressModel {
             @NotBlank(message = "UF é um campo obrigatório") String UF,
             @NotBlank(message = "Latitude é um campo obrigatório") String latitude,
             @NotBlank(message = "Longitude é um campo obrigatório") String longitude,
-            @Range(min = 1) String radius) {
+            @Range(min = 1) int radius) {
         this.idUsuario = idUsuario;
         this.cep = cep;
         this.bairro = bairro;
@@ -177,11 +177,11 @@ public class userAdressModel {
         this.longitude = longitude;
     }
 
-    public String getRadius() {
+    public int getRadius() {
         return radius;
     }
 
-    public void setRadius(String radius) {
+    public void setRadius(int radius) {
         this.radius = radius;
     }
 

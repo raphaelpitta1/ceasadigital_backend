@@ -1,6 +1,8 @@
 package com.ceasa.digital.services;
 
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -58,7 +60,7 @@ public class userAdressService {
 
     public Optional<userAdressModel> recuperaEnderecoByIdUsuario(int idUsuario) {
 
-        Optional<userAdressModel> users = uRepository.findById(idUsuario);
+        Optional<userAdressModel> users = uRepository.findByidUsuario(idUsuario);
 
         return users;
 
@@ -68,7 +70,7 @@ public class userAdressService {
 
         
 
-             return uRepository.findEndProdutores();
+             return uRepository.findEndProdutores().get(0);
 
       
 

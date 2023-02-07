@@ -2,6 +2,8 @@ package com.ceasa.digital.Repository;
 
 
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -25,7 +27,7 @@ public interface userAdressRepository extends JpaRepository<userAdressModel,Inte
 
 
     @Query("select distinct a from Enderecos a, Oferta b where a.idUsuario = b.idVendedor")
-    Optional<userAdressModel> findEndProdutores();
+    List<Optional<userAdressModel>> findEndProdutores();
 
   
 
