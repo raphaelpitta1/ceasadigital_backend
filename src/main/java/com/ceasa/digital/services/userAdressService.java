@@ -60,17 +60,17 @@ public class userAdressService {
 
     public Optional<userAdressModel> recuperaEnderecoByIdUsuario(int idUsuario) {
 
-        Optional<userAdressModel> users = uRepository.findByidUsuario(idUsuario);
+    Optional<userAdressModel> users = uRepository.findByidUsuario(idUsuario).get(0);
 
         return users;
 
     }
 
-    public Optional<userAdressModel> recuperaEnderecosProdutores() {
+    public List<Optional<userAdressModel>> recuperaEnderecosProdutores() {
 
         
 
-             return uRepository.findEndProdutores().get(0);
+             return uRepository.findEndProdutores();
 
       
 

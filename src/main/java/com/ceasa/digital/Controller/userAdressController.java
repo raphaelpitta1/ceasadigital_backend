@@ -40,7 +40,7 @@ public class userAdressController {
     userAdressService uService;
 
      @GetMapping
-    public ResponseEntity<Optional<userAdressModel>> selectAdressProdutores() {
+    public ResponseEntity<List<Optional<userAdressModel>>> selectAdressProdutores() {
 
         return ResponseEntity.status(200).body(uService.recuperaEnderecosProdutores());
     }

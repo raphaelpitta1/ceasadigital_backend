@@ -21,7 +21,7 @@ import com.ceasa.digital.Model.userAdressModel;
 public interface userAdressRepository extends JpaRepository<userAdressModel,Integer>{
     
 
-    Optional<userAdressModel> findByidUsuario(int idUsuario);
+    List<Optional<userAdressModel>> findByidUsuario(int idUsuario);
 
     Optional<userAdressModel> findByidUsuarioAndNumeroAndCep(int idUsuario, int numero, String cep);
 
