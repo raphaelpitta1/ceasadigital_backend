@@ -14,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -48,6 +49,16 @@ public class securityConfig extends WebSecurityConfigurerAdapter{
     }
 
     
+
+
+
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { 
+        http.authorizeRequests() 
+          .antMatchers("/**") 
+          .permitAll(); 
+        return http.build(); 
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder(){
 

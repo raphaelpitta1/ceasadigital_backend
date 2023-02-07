@@ -1,0 +1,216 @@
+package com.ceasa.digital.Model;
+
+import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.ManyToAny;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Range;
+
+@Entity(name = "Enderecos")
+public class userAdressModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Range(min = 1)
+    private int idUsuario;
+    @NotBlank(message = "CEP é um campo obrigatório")
+    @Column(length = 15)
+    private String cep;
+    @NotBlank(message = "bairro é um campo obrigatório")
+    @Column(length = 255)
+    private String bairro;
+    @NotBlank(message = "logradouro é um campo obrigatório")
+    @Column(length = 255)
+    private String logradouro;
+    @Range(min = 1)
+    @Column(length = 100)
+    private int numero;
+    
+    @Column(length = 100)
+    private String complemento;
+    @NotBlank(message = "Cidade é um campo obrigatório")
+    @Column(length = 50)
+    private String cidade;
+    @NotBlank(message = "UF é um campo obrigatório")
+    @Column(length = 2)
+    private String UF;
+    @NotBlank(message = "Latitude é um campo obrigatório")
+    @Column(length = 50)
+    private String latitude;
+    @NotBlank(message = "Longitude é um campo obrigatório")
+    @Column(length = 50)
+    private String longitude;
+    @Range(min = 1)
+    @Column(length = 50)
+    private String radius;
+
+    private Boolean status = true;
+
+    @CreationTimestamp
+    private Timestamp createDate;
+
+    @UpdateTimestamp
+    private Timestamp updateDate;
+
+    public userAdressModel() {
+    }
+
+ 
+
+
+
+    public userAdressModel(@Range(min = 1) int idUsuario,
+            @NotBlank(message = "CEP é um campo obrigatório") String cep,
+            @NotBlank(message = "bairro é um campo obrigatório") String bairro,
+            @NotBlank(message = "logradouro é um campo obrigatório") String logradouro,
+            @Range(min = 1)int numero, 
+            String complemento,
+            @NotBlank(message = "Cidade é um campo obrigatório") String cidade,
+            @NotBlank(message = "UF é um campo obrigatório") String UF,
+            @NotBlank(message = "Latitude é um campo obrigatório") String latitude,
+            @NotBlank(message = "Longitude é um campo obrigatório") String longitude,
+            @Range(min = 1) String radius) {
+        this.idUsuario = idUsuario;
+        this.cep = cep;
+        this.bairro = bairro;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.cidade = cidade;
+        this.UF = UF;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.radius = radius;
+    }
+
+
+
+
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getUF() {
+        return UF;
+    }
+
+    public void setUF(String uF) {
+        UF = uF;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getRadius() {
+        return radius;
+    }
+
+    public void setRadius(String radius) {
+        this.radius = radius;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Timestamp getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
+    }
+
+    public Timestamp getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+}

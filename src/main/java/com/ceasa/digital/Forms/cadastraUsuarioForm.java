@@ -21,8 +21,7 @@ public class cadastraUsuarioForm {
     @NotBlank(message = "Telefone é um campo obrigatório")
     @Size(min = 11,max = 11,message = "O Telefone precisa ter 11 caracteres")
     private String telefone;
-    @NotBlank(message = "Cep é um campo obrigatório")
-    @Size(min = 8,max = 11,message = "O CEP precisa ter 11 caracteres")
+
     private String cep;
     @Size(min = 0,max = 50,message = "O campo latitude deve conter no máximo 50 caracteres")
     private String latitude;
@@ -35,7 +34,7 @@ public class cadastraUsuarioForm {
             @NotBlank(message = "Documento é um campo obrigatório") @Size(min = 11, max = 15, message = "O documento precisa ter entre 11(CPF) a 15(CNPJ) caracteres") String documento,
             @NotBlank(message = "Senha é um campo obrigatório") @Size(min = 8, max = 20, message = "A senha precisa ter entre 8 a 20 caracteres") String senha,
             @NotBlank(message = "Telefone é um campo obrigatório") @Size(min = 11, max = 11, message = "O Telefone precisa ter 11 caracteres") String telefone,
-            @NotBlank(message = "Cep é um campo obrigatório") @Size(min = 8, max = 11, message = "O CEP precisa ter 11 caracteres") String cep,
+            String cep,
             @Size(min = 0,max = 50,message = "O campo latitude deve conter no máximo 50 caracteres") String latitude,
             @Size(min = 0,max = 50,message = "O campo longitude deve conter no máximo 50 caracteres") String longitude
             

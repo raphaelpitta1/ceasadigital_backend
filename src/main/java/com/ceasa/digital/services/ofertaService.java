@@ -68,6 +68,14 @@ public class ofertaService {
 
     }
 
+    public List<Optional<ofertaModel>> recuperaOfertasByProduto(int idProduto) {
+
+        List<Optional<ofertaModel>> ofertas = oRepository.findByidProduto(idProduto);
+
+        return ofertas;
+
+    }
+
     public List<ofertaModel> recuperaOfertas() {
 
         List<ofertaModel> ofertas = oRepository.findAll();

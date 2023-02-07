@@ -32,10 +32,16 @@ public class produtoController {
     @Autowired
     produtoService pService;
 
-    @GetMapping
+    @GetMapping("/disponiveis")
     public ResponseEntity<List<produtoModel>> selectProdutos() {
 
         return ResponseEntity.status(200).body(pService.recuperaProdutos());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<produtoModel>> selectProdutosComOferta() {
+
+        return ResponseEntity.status(200).body(pService.recuperaProdutosComOferta());
     }
 
     @PostMapping

@@ -1,5 +1,6 @@
 package com.ceasa.digital.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,8 @@ public class produtoService {
 
     @Autowired
     private produtoRepository pRepository;
+    @Autowired
+    private ofertaService ofertaService;
 
     public httpResponses cadastrarProduto(String nome, String categoria) {
 
@@ -47,6 +50,24 @@ public class produtoService {
 
     }
 
+    public List<produtoModel> recuperaProdutosComOferta() {
+
+        List<produtoModel> produtos = pRepository.findAll();
+
+        List<produtoModel> produtosReturn = new ArrayList<>();
+
+
+        for (produtoModel produtoModel : produtos) {
+
+            if(!ofertaService.recuperaOfertasByProduto(produtoModel.getId()).isEmpty()){
+
+                produtosReturn.add(produtoModel);
+            }
+            
+        }
+        return produtosReturn;
+
+    }
     public List<produtoModel> recuperaProdutos() {
 
         List<produtoModel> produtos = pRepository.findAll();
@@ -54,6 +75,8 @@ public class produtoService {
         return produtos;
 
     }
+
+
 
     public httpResponses deletarProduto(String nome) {
 

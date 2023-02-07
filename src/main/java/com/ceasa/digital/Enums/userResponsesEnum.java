@@ -4,6 +4,8 @@ import com.ceasa.digital.services.httpResponses;
 
 public enum userResponsesEnum {
     uCadastrado(200,"Usuário Cadastrado com Sucesso"),
+    eCadastrado(200,"Endereço Cadastrado com Sucesso"),
+    eJacadastrado(422,"Usuário já Possui Esse endereço"), 
     uJacadastrado(422,"Usuário já Possui Cadastro"), 
     uProblem(503,"Erro ao Processar Ação. Tente mais tarde!"),
     u_Nencontrado(422,"Usuário não encontrado"), 

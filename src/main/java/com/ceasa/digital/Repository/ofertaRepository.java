@@ -12,4 +12,6 @@ public interface ofertaRepository extends JpaRepository<ofertaModel,Integer> {
     
     List<Optional<ofertaModel>> findByidVendedor(int idVendedor);
 
+    List<Optional<ofertaModel>> findByidProduto(int idProduto);
+
 }
