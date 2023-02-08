@@ -57,17 +57,18 @@ public class userAdressService {
 
     }
 
-    public Optional<userAdressModel> recuperaEnderecoByIdUsuario(int idUsuario) {
+    public userAdressModel recuperaEnderecoByIdUsuario(int idUsuario) {
     
     List<Optional<userAdressModel>> users = uRepository.findByidUsuario(idUsuario);
 
     if(users.isEmpty()){
 
-        return null;
+        userAdressModel user2 = new userAdressModel();
+        return user2;
     }else{
 
 
-        return users.get(0);
+        return users.get(0).get();
     }
         
 
