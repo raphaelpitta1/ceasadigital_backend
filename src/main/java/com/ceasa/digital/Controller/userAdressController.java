@@ -48,7 +48,7 @@ public class userAdressController {
  
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<Optional<userAdressModel>> selectEnderecoUsuariosbyId(@PathVariable int id) {
+    public ResponseEntity<userAdressModel> selectEnderecoUsuariosbyId(@PathVariable int id) {
 
         return ResponseEntity.status(200).body(uService.recuperaEnderecoByIdUsuario(id));
     }

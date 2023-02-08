@@ -57,17 +57,18 @@ public class userAdressService {
 
     }
 
-    public Optional<userAdressModel> recuperaEnderecoByIdUsuario(int idUsuario) {
+    public userAdressModel recuperaEnderecoByIdUsuario(int idUsuario) {
     
     List<Optional<userAdressModel>> users = uRepository.findByidUsuario(idUsuario);
 
     if(users.isEmpty()){
 
-        return null;
+        userAdressModel user2 = new userAdressModel();
+        return user2;
     }else{
 
 
-        return users.get(0);
+        return users.get(0).get();
     }
         
 
@@ -89,15 +90,15 @@ public class userAdressService {
 
         try {
 
-            if (!uRepository.findByidUsuarioAndNumeroAndCep(uModel.getIdUsuario(),uModel.getNumero(), uModel.getCep()).isEmpty()) {
+            if (!uRepository.findByidUsuario(uModel.getIdUsuario()).isEmpty()) {
 
-                Optional<userAdressModel> atualizaEndereco = uRepository.findByidUsuarioAndNumeroAndCep(uModel.getIdUsuario(),uModel.getNumero(), uModel.getCep()).get(0);
+                Optional<userAdressModel> atualizaEndereco = uRepository.findByidUsuario(uModel.getIdUsuario()).get(0);
                 atualizaEndereco.get().setBairro(uModel.getBairro());
                 atualizaEndereco.get().setCep(uModel.getCep());
                 atualizaEndereco.get().setCidade(uModel.getCidade());
                 atualizaEndereco.get().setIdUsuario(uModel.getIdUsuario());
                 atualizaEndereco.get().setLatitude(uModel.getLatitude());
-                atualizaEndereco.get().setLongitude(uModel.getLatitude());
+                atualizaEndereco.get().setLongitude(uModel.getLongitude());
                 atualizaEndereco.get().setLogradouro(uModel.getLogradouro());
                 atualizaEndereco.get().setNumero(uModel.getNumero());
                 atualizaEndereco.get().setUF(uModel.getUF());
