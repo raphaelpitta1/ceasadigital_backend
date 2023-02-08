@@ -93,9 +93,7 @@ public class userController {
     public ResponseEntity<Object> atualizaUsuario(@Validated @RequestBody atualizaUsuarioForm umModel) {
 
         try {
-            httpResponses Response = uService.atualizaUsuario(umModel.getNome(), umModel.getSobrenome(),
-                    umModel.getDocumento(), umModel.getTelefone(), umModel.getCep(), umModel.getLatitude(),
-                    umModel.getLongitude());
+            httpResponses Response = uService.atualizaUsuario(umModel.getId(),umModel.getNome(), umModel.getTelefone(), umModel.getSenha());
 
             return Response.responseProcess();
             // return

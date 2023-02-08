@@ -106,16 +106,15 @@ public class userService implements UserDetailsService {
 
     
 
-    public httpResponses atualizaUsuario(String nome, String sobrenome,String documento,
-            String telefone, String cep, String latitude, String longitude) {
+    public httpResponses atualizaUsuario(int id, String nome, String telefone ,String senha) {
 
         try {
 
-            Optional<userModel> atualizaPessoa = uRepository.findByDocumento(documento);
+            Optional<userModel> atualizaPessoa = uRepository.findById(id);
             if (!atualizaPessoa.isEmpty()) {
 
                 atualizaPessoa.get().setNome(nome);
-                atualizaPessoa.get().setSobrenome(sobrenome);
+                atualizaPessoa.get().setSenha(senha);
                 atualizaPessoa.get().setTelefone(telefone);
 
                 uRepository.save(atualizaPessoa.get());
