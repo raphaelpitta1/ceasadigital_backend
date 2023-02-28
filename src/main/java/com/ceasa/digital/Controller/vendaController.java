@@ -1,6 +1,5 @@
 package com.ceasa.digital.Controller;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
 import com.ceasa.digital.Forms.cadastraVendaForm;
 import com.ceasa.digital.Forms.cancelarConcluirVendaForm;
 
@@ -29,7 +26,6 @@ import com.ceasa.digital.Model.vendaModel;
 import com.ceasa.digital.services.httpResponses;
 
 import com.ceasa.digital.services.vendaService;
-
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -39,93 +35,75 @@ public class vendaController {
     @Autowired
     vendaService vService;
 
-
     @GetMapping
-    public ResponseEntity<List<vendaModel>> recuperaVendas(){
-
-        
+    public ResponseEntity<List<vendaModel>> recuperaVendas() {
 
         return ResponseEntity.status(200).body(vService.recuperaVendas());
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<List<Optional<vendaModel>>> recuperarVendasId(@PathVariable int idVendedor){
-
-        
-
-        return ResponseEntity.status(200).body(vService.recuperaVendasVendedor(idVendedor));
-    }
-    
 
     @GetMapping("/vendedor/{idVendedor}")
-    public ResponseEntity<List<Optional<vendaModel>>> recuperarVendasVendedor(@PathVariable int idVendedor){
-
-        
+    public ResponseEntity<List<Optional<vendaModel>>> recuperarVendasVendedor(@PathVariable int idVendedor) {
 
         return ResponseEntity.status(200).body(vService.recuperaVendasVendedor(idVendedor));
     }
-    @GetMapping("/comprador/{idComprador}")
-    public ResponseEntity<List<Optional<vendaModel>>> recuperarVendasComprador(@PathVariable int idComprador){
 
-        
+    @GetMapping("/comprador/{idComprador}")
+    public ResponseEntity<List<Optional<vendaModel>>> recuperarVendasComprador(@PathVariable int idComprador) {
 
         return ResponseEntity.status(200).body(vService.recuperaComprasComprador(idComprador));
     }
 
-    
-
-
     @PostMapping
-    public ResponseEntity<Object> cadastrarVenda(@Valid @RequestBody cadastraVendaForm vModel){
+    public ResponseEntity<Object> cadastrarVenda(@Valid @RequestBody cadastraVendaForm vModel) {
 
-        try{
-            
-            httpResponses Response = vService.fazerVenda(vModel.getIdOferta(), vModel.getIdComprador(), vModel.getQtd());
-            
+        try {
+
+            httpResponses Response = vService.fazerVenda(vModel.getIdOferta(), vModel.getIdComprador(),
+                    vModel.getQtd());
+
             return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+            // return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
 
             return ResponseEntity.status(501).body(ex.getMessage());
         }
 
- 
     }
 
     @PostMapping("/cancelamento")
-    public ResponseEntity<Object> cancelarVenda(@Valid @RequestBody cancelarConcluirVendaForm vModel){
+    public ResponseEntity<Object> cancelarVenda(@Valid @RequestBody cancelarConcluirVendaForm vModel) {
 
-        try{
-            
+        try {
+
             httpResponses Response = vService.processoCancelamento(vModel.getIdVenda(), vModel.getIdUsuario());
-            
-            return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
 
-        }catch(Exception ex){
+            return Response.responseProcess();
+            // return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+
+        } catch (Exception ex) {
 
             return ResponseEntity.status(501).body(ex.getMessage());
         }
 
- 
     }
 
     @PostMapping("/conclusao")
-    public ResponseEntity<Object> conclusao(@Valid @RequestBody cancelarConcluirVendaForm vModel){
+    public ResponseEntity<Object> conclusao(@Valid @RequestBody cancelarConcluirVendaForm vModel) {
 
-        try{
-            
+        try {
+
             httpResponses Response = vService.processoConclusao(vModel.getIdVenda(), vModel.getIdUsuario());
-            
-            return Response.responseProcess();
-            //return ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
 
-        }catch(Exception ex){
+            return Response.responseProcess();
+            // return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+
+        } catch (Exception ex) {
 
             return ResponseEntity.status(501).body(ex.getMessage());
         }
-
- 
     }
- 
 }

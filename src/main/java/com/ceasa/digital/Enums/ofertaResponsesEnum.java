@@ -3,16 +3,16 @@ package com.ceasa.digital.Enums;
 import com.ceasa.digital.services.httpResponses;
 
 public enum ofertaResponsesEnum {
-    oCadastrado(200,"Oferta Cadastrada com Sucesso"),
-    oJacadastrado(422,"Oferta já Existente"), 
-    oProblem(503,"Erro ao Processar Ação. Tente mais tarde!"),
+    oCadastrado(200,"Oferta cadastrada com sucesso"),
+    oJacadastrado(422,"Oferta já existente"), 
+    oProblem(503,"Erro ao processar ação. Tente mais tarde!"),
     o_Nencontrado(422,"Oferta não encontrada"), 
-    oUpdate(200,"Oferta Atualizada com Sucesso"),
+    oUpdate(200,"Oferta atualizada com sucesso"),
     oJaDesativado(422, "Essa oferta já foi encerrada, não é necessário fazer essa ação novamente"),
-    oAtivada(200,"Oferta foi reativada com Sucesso"),
+    oAtivada(200,"Oferta foi reativada com sucesso"),
     oJaAtivada(422, "Essa oferta já está ativada, não é necessário fazer essa ação novamente"),
     oDesativadoAcao(422, "Ação não permitida, a oferta esta encerrada"),
-    oDesativado(200, "Oferta Encerrada com Sucesso");
+    oDesativado(200, "Oferta encerrada com sucesso");
 
     private final String message;
     private final int status_code;

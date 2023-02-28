@@ -40,7 +40,5 @@ public class negociacaoController {
         
 
         return ResponseEntity.status(200).body(nService.recuperaNegociacao(idVenda));
-    }
-   
-    
+    }    
 }

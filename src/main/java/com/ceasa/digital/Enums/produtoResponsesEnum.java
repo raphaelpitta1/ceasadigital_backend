@@ -3,12 +3,12 @@ package com.ceasa.digital.Enums;
 import com.ceasa.digital.services.httpResponses;
 
 public enum produtoResponsesEnum {
-    pCadastrado(200,"Produto Cadastrado com Sucesso"),
-    pJacadastrado(422,"Produto já Possui Cadastro"), 
+    pCadastrado(200,"Produto cadastrado com sucesso"),
+    pJacadastrado(422,"Produto já possui cadastro"), 
     pProblem(503,"Erro ao Processar Ação. Tente mais tarde!"),
     p_Nencontrado(422,"Produto não encontrado"), 
-    pUpdate(200,"Produto Atualizado com Sucesso"),
-    pDesativado(200, "Produto Deletado com Sucesso");
+    pUpdate(200,"Produto atualizado com sucesso"),
+    pDesativado(200, "Produto deletado com sucesso");
 
     private final String message;
     private final int status_code;

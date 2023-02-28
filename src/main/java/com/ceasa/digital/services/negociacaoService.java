@@ -66,7 +66,7 @@ public class negociacaoService {
     public Optional<negociacaoModel> recuperaNegociacao(int idVenda){
        
        
-        return nRepository.findById(idVenda);
+        return nRepository.findByidVenda(idVenda);
 
     }
 

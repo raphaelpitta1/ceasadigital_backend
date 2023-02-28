@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -31,14 +28,6 @@ public class userAdressService {
     public httpResponses cadastrarEndereco(userAdressModel user) {
 
         try {
-
-           
-            
-        
-
-        
-            
-
             if (!uRepository.findByidUsuarioAndNumeroAndCep(user.getId(), user.getNumero(), user.getCep()).isEmpty()) {
 
                 return userResponsesEnum.eJacadastrado.getResponseObject();

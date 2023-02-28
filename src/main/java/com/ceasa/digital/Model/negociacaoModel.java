@@ -206,8 +206,5 @@ public class negociacaoModel {
     public void setSubStatusNegociacao(String subStatusNegociacao) {
         this.subStatusNegociacao = subStatusNegociacao;
     }
-
-
-
     
 }
