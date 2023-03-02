@@ -26,34 +26,24 @@ public class userAdressModel {
     @NotBlank(message = "CEP é um campo obrigatório")
     @Column(length = 15)
     private String cep;
-    @NotBlank(message = "bairro é um campo obrigatório")
     @Column(length = 255)
     private String bairro;
-    @NotBlank(message = "logradouro é um campo obrigatório")
     @Column(length = 255)
     private String logradouro;
-    @Range(min = 1)
     @Column(length = 100)
     private int numero;
-    
+
     @Column(length = 100)
     private String complemento;
-    @NotBlank(message = "Cidade é um campo obrigatório")
     @Column(length = 50)
     private String cidade;
-    @NotBlank(message = "UF é um campo obrigatório")
     @Column(length = 2)
     private String UF;
-    @NotBlank(message = "Latitude é um campo obrigatório")
     @Column(length = 50)
     private String latitude;
-    @NotBlank(message = "Longitude é um campo obrigatório")
     @Column(length = 50)
     private String longitude;
-    @Range(min = 1)
-  
     private int radius;
-
     private Boolean status = true;
 
     @CreationTimestamp
@@ -65,21 +55,17 @@ public class userAdressModel {
     public userAdressModel() {
     }
 
- 
-
-
-
     public userAdressModel(@Range(min = 1) int idUsuario,
             @NotBlank(message = "CEP é um campo obrigatório") String cep,
-            @NotBlank(message = "bairro é um campo obrigatório") String bairro,
-            @NotBlank(message = "logradouro é um campo obrigatório") String logradouro,
-            @Range(min = 1)int numero, 
+            String bairro,
+            String logradouro,
+            int numero,
             String complemento,
-            @NotBlank(message = "Cidade é um campo obrigatório") String cidade,
-            @NotBlank(message = "UF é um campo obrigatório") String UF,
-            @NotBlank(message = "Latitude é um campo obrigatório") String latitude,
-            @NotBlank(message = "Longitude é um campo obrigatório") String longitude,
-            @Range(min = 1) int radius) {
+            String cidade,
+            String UF,
+            String latitude,
+            String longitude,
+            int radius) {
         this.idUsuario = idUsuario;
         this.cep = cep;
         this.bairro = bairro;
@@ -92,10 +78,6 @@ public class userAdressModel {
         this.longitude = longitude;
         this.radius = radius;
     }
-
-
-
-
 
     public int getIdUsuario() {
         return idUsuario;
