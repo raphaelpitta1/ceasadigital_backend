@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 import com.ceasa.digital.Enums.vendaResponsesEnum;
 import com.ceasa.digital.Enums.negociacaoResponsesEnum;
 import com.ceasa.digital.Enums.vendaNegociacaoStatusEnum;
-
+import com.ceasa.digital.Model.negociacaoModel;
 import com.ceasa.digital.Model.ofertaModel;
 import com.ceasa.digital.Model.produtoModel;
 import com.ceasa.digital.Model.userModel;
 import com.ceasa.digital.Model.vendaModel;
+import com.ceasa.digital.Repository.negociacaoRepository;
 import com.ceasa.digital.Repository.ofertaRepository;
 import com.ceasa.digital.Repository.produtoRepository;
 import com.ceasa.digital.Repository.vendaRepository;
@@ -130,6 +131,80 @@ public class vendaService {
 
     }
 
+    
+    
+    
+    public httpResponses editarVenda(int idVenda, int qtd) {
+
+        try {
+
+            vendaModel validaExistenciaVenda = vRepository.findById(idVenda).get();
+            Optional<ofertaModel> validaExistenciaOferta = oRepository.findById(validaExistenciaVenda.getIdOferta());
+
+            if (!validaExistenciaOferta.isEmpty()) {
+
+                if (validaExistenciaOferta.get().getQtdDisponivel() >= qtd) {
+
+                  
+
+                            validaExistenciaVenda.setQtd_comprada(qtd);
+                            // salvando venda
+                        
+                            vRepository.save(validaExistenciaVenda);
+
+                            
+                            
+                                   negociacaoModel negociacao = nService.recuperaNegociacao(validaExistenciaVenda.getId()).get();
+
+                                   negociacao.setQtd_comprada(validaExistenciaVenda.getQtd_comprada());
+                                    
+                                    nService.editaNegociacao(negociacao);
+                                    
+                           
+                           
+                           
+                            produtoModel produto = pRepository.findById(validaExistenciaOferta.get().getIdProduto())
+                                    .get();
+
+                            userModel Vendedor = uService
+                                    .recuperaUsuariobyId(validaExistenciaOferta.get().getIdVendedor()).get();
+                            userModel Comprador = uService.recuperaUsuariobyId(validaExistenciaVenda.getIdComprador()).get();
+                            String message = "Ola, " + Vendedor.getNome().toString() + ". \r\nO nosso parceiro "
+                                    + Comprador.getNome().toString() + "fez uma alteração na negociação de: *"
+                                    + produto.getNome().toString()
+                                    + "* :)\r\n\r\nAcesse o aplicativo e de continuidade ao processo de venda\r\n\r\n*Link do Aplicativo:* "
+                                    + appLink + "\r\n\r\nAtenciosamente,\r\n*Equipe Ceasa Digital*";
+
+                            System.out.println(message);
+                            wService.setNumber(phonePrefix + Vendedor.getTelefone());
+                            wService.setMessage(message);
+                            wService.sendMessage();
+
+                            // ENVIAR MENSAGEM DE INICIO DE NEGOCIACAO
+                            return vendaResponsesEnum.vCadastrado.getResponseObject();
+
+                        }else {
+
+                            return vendaResponsesEnum.qtd_indisponivel.getResponseObject();
+        
+                        }
+
+                    } else{
+
+                        return vendaResponsesEnum.v_Nencontrado.getResponseObject();
+                    }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return vendaResponsesEnum.vProblem.getResponseObject();
+
+        }
+      
+
+    }
+
+
+    
     public List<vendaModel> recuperaVendas() {
 
         List<vendaModel> vendas = vRepository.findAll();

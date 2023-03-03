@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ceasa.digital.Forms.cadastraVendaForm;
 import com.ceasa.digital.Forms.cancelarConcluirVendaForm;
-
+import com.ceasa.digital.Forms.editaVendaForm;
 import com.ceasa.digital.Model.vendaModel;
 import com.ceasa.digital.services.httpResponses;
 
@@ -56,6 +56,7 @@ public class vendaController {
     @PostMapping
     public ResponseEntity<Object> cadastrarVenda(@Valid @RequestBody cadastraVendaForm vModel) {
 
+
         try {
 
             httpResponses Response = vService.fazerVenda(vModel.getIdOferta(), vModel.getIdComprador(),
@@ -72,6 +73,26 @@ public class vendaController {
 
     }
 
+    @PatchMapping
+    public ResponseEntity<Object> editarVenda(@Valid @RequestBody editaVendaForm vModel) {
+
+
+        try {
+
+            httpResponses Response = vService.editarVenda(vModel.getIdVenda(),
+                    vModel.getQtd());
+
+            return Response.responseProcess();
+            // return
+            // ResponseEntity.status(Response.getStatusCode()).body(Response.getMessage());
+
+        } catch (Exception ex) {
+
+            return ResponseEntity.status(501).body(ex.getMessage());
+        }
+
+    }
+   
     @PostMapping("/cancelamento")
     public ResponseEntity<Object> cancelarVenda(@Valid @RequestBody cancelarConcluirVendaForm vModel) {
 

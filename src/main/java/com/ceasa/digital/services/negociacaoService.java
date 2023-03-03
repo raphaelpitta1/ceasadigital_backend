@@ -58,6 +58,17 @@ public class negociacaoService {
 
     }
 
+
+    public void editaNegociacao(negociacaoModel nModel) {
+
+        
+
+        nRepository.save(nModel);
+
+    }
+
+
+
     public Optional<negociacaoModel> recuperaNegociacao(int idVenda) {
 
         return nRepository.findByidVenda(idVenda);
