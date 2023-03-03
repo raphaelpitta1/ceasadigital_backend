@@ -230,10 +230,16 @@ public class negociacaoService {
     }
 
     public httpResponses processoConclusao(int idVenda, int idUsuario) {
+
+
         vendaModel objVenda = new vendaModel();
         negociacaoModel objNegociacao = new negociacaoModel();
 
+
+
         Optional<vendaModel> validaExistenciaVenda = vRepository.findById(idVenda);
+
+
         if (!validaExistenciaVenda.isEmpty() && (validaExistenciaVenda.get().getIdComprador() == idUsuario
                 || validaExistenciaVenda.get().getIdVendedor() == idUsuario)) {
 
@@ -278,10 +284,13 @@ public class negociacaoService {
 
                     vRepository.save(objVenda);
                     
-                    ofertaModel oferta = oRepository.findById(objVenda.getIdOferta()).get();
+                   
+   // DEBITANDO DO ESTOQUE DO VENDEDOR
+   ofertaModel oferta = oRepository.findById(objVenda.getIdOferta()).get();
 
-                    oferta.setQtdDisponivel(oferta.getQtdDisponivel() - objVenda.getQtd_comprada());
+   oferta.setQtdDisponivel(oferta.getQtdDisponivel() - objVenda.getQtd_comprada());
 
+   oRepository.save(oferta);
                     userModel Vendedor = uService.recuperaUsuariobyId(validaExistenciaVenda.get().getIdVendedor())
                             .get();
                     userModel Comprador = uService.recuperaUsuariobyId(validaExistenciaVenda.get().getIdComprador())
@@ -294,7 +303,10 @@ public class negociacaoService {
                             + produto.getNome().toString()
                             + "* foi concluido com sucesso.\r\n\r\nAtenciosamente,\r\n*Equipe Ceasa Digital*";
 
-                    System.out.println(message);
+
+                 
+
+
 
                     wService.setNumber(phonePrefix + Vendedor.getTelefone());
                     wService.setMessage(message);

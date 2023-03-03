@@ -73,7 +73,7 @@ public class vendaService {
                             chatFirebaseService.addContact(idComprador, validaExistenciaOferta.get().getIdVendedor());
 
                             // salvando venda
-                            oRepository.save(validaExistenciaOferta.get());
+                            //oRepository.save(validaExistenciaOferta.get());
                             vRepository.save(vModel);
 
                             Optional<vendaModel> vModelNeg = vRepository
