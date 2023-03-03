@@ -1,6 +1,5 @@
 package com.ceasa.digital.services;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -34,11 +33,9 @@ public class ofertaService {
             oModel.setvlUnMedida(vlUnMedida);
             oModel.setPesoUnMedida(pesoUnMedida);
 
-            List<Optional<ofertaModel>>  ofertas = oRepository.findByidVendedor(idVendedor);
-                
-            if (!ofertas.isEmpty()) {
+            List<Optional<ofertaModel>> ofertas = oRepository.findByidVendedor(idVendedor);
 
-                
+            if (!ofertas.isEmpty()) {
 
                 for (int i = 0; i < ofertas.size(); i++) {
 
@@ -57,8 +54,6 @@ public class ofertaService {
 
                 return ofertaResponsesEnum.oCadastrado.getResponseObject();
             }
-
-      
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -87,16 +82,14 @@ public class ofertaService {
     public List<Optional<ofertaModel>> recuperaOfertasPorVendedor(int idVendedor) {
 
         List<Optional<ofertaModel>> ofertas = oRepository.findByidVendedor(idVendedor);
-        
-            return ofertas;
-        
+
+        return ofertas;
+
     }
 
     public httpResponses encerrarOferta(int id) {
 
         try {
-
-           
 
             Optional<ofertaModel> validaExistenciaOferta = oRepository.findById(id);
 
@@ -106,18 +99,16 @@ public class ofertaService {
 
             }
 
-            if(validaExistenciaOferta.get().isStatus()){
+            if (validaExistenciaOferta.get().isStatus()) {
                 ofertaModel oModel = validaExistenciaOferta.get();
                 oModel.setStatus(false);
                 oRepository.save(oModel);
                 return ofertaResponsesEnum.oDesativado.getResponseObject();
-    
-            }else{
+
+            } else {
                 return ofertaResponsesEnum.oJaDesativado.getResponseObject();
 
             }
-           
-            
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -126,11 +117,10 @@ public class ofertaService {
         }
 
     }
+
     public httpResponses ativarOferta(int id) {
 
         try {
-
-           
 
             Optional<ofertaModel> validaExistenciaOferta = oRepository.findById(id);
 
@@ -140,18 +130,16 @@ public class ofertaService {
 
             }
 
-            if(!validaExistenciaOferta.get().isStatus()){
+            if (!validaExistenciaOferta.get().isStatus()) {
                 ofertaModel oModel = validaExistenciaOferta.get();
                 oModel.setStatus(true);
                 oRepository.save(oModel);
                 return ofertaResponsesEnum.oAtivada.getResponseObject();
-    
-            }else{
+
+            } else {
                 return ofertaResponsesEnum.oJaAtivada.getResponseObject();
 
             }
-           
-            
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -164,7 +152,6 @@ public class ofertaService {
     public httpResponses atualizarOferta(atualizaOfertaForms atualizaOfertaForms) {
 
         try {
-           
 
             Optional<ofertaModel> validaExistenciaOferta = oRepository.findById(atualizaOfertaForms.getId());
 
@@ -174,23 +161,20 @@ public class ofertaService {
 
             }
 
-            if(validaExistenciaOferta.get().isStatus()){
+            if (validaExistenciaOferta.get().isStatus()) {
 
                 ofertaModel oModel = validaExistenciaOferta.get();
                 oModel.setQtdDisponivel(atualizaOfertaForms.getQtd());
                 oModel.setvlUnMedida(atualizaOfertaForms.getVlUnMedida());
-         
-    
+
                 oRepository.save(oModel);
-    
+
                 return ofertaResponsesEnum.oUpdate.getResponseObject();
-            }else{
+            } else {
 
                 return ofertaResponsesEnum.oDesativadoAcao.getResponseObject();
 
             }
-            
-           
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -199,7 +183,5 @@ public class ofertaService {
         }
 
     }
-
-   
 
 }

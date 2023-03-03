@@ -9,5 +9,6 @@ import com.ceasa.digital.Model.negociacaoModel;
 public interface negociacaoRepository extends JpaRepository<negociacaoModel, Integer> {
 
     Optional<negociacaoModel> findByidVenda(int idVenda);
+    Optional<negociacaoModel> findByid(int idVenda);
     
 }

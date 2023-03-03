@@ -32,7 +32,6 @@ public class userAdressModel {
     private String logradouro;
     @Column(length = 100)
     private int numero;
-
     @Column(length = 100)
     private String complemento;
     @Column(length = 50)

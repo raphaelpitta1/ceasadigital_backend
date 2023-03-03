@@ -1,10 +1,8 @@
 package com.ceasa.digital.services;
 
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,25 +13,21 @@ import com.ceasa.digital.Enums.userResponsesEnum;
 import com.ceasa.digital.Model.userAdressModel;
 import com.ceasa.digital.Repository.userAdressRepository;
 
-
 @Service
 public class userAdressService {
-    
-        
+
     @Autowired
     private userAdressRepository uRepository;
-
-
 
     public httpResponses cadastrarEndereco(userAdressModel user) {
 
         try {
-            if (!uRepository.findByidUsuarioAndNumeroAndCep(user.getId(), user.getNumero(), user.getCep()).isEmpty()) {
+            if (!uRepository.findByidUsuarioAndCep(user.getId(), user.getCep()).isEmpty()) {
 
                 return userResponsesEnum.eJacadastrado.getResponseObject();
 
             }
-            
+
             uRepository.save(user);
 
             return userResponsesEnum.eCadastrado.getResponseObject();
@@ -47,34 +41,26 @@ public class userAdressService {
     }
 
     public userAdressModel recuperaEnderecoByIdUsuario(int idUsuario) {
-    
-    List<Optional<userAdressModel>> users = uRepository.findByidUsuario(idUsuario);
 
-    if(users.isEmpty()){
+        List<Optional<userAdressModel>> users = uRepository.findByidUsuario(idUsuario);
 
-        userAdressModel user2 = new userAdressModel();
-        return user2;
-    }else{
+        if (users.isEmpty()) {
 
+            userAdressModel user2 = new userAdressModel();
+            return user2;
+        } else {
 
-        return users.get(0).get();
-    }
-        
+            return users.get(0).get();
+        }
 
     }
 
     public List<Optional<userAdressModel>> recuperaEnderecosProdutores() {
 
-        
-
-             return uRepository.findEndProdutores();
-
-      
+        return uRepository.findEndProdutores();
 
     }
 
-    
-    
     public httpResponses atualizaEnderecoByIdUsuario(userAdressModel uModel) {
 
         try {
@@ -91,7 +77,6 @@ public class userAdressService {
                 atualizaEndereco.get().setLogradouro(uModel.getLogradouro());
                 atualizaEndereco.get().setNumero(uModel.getNumero());
                 atualizaEndereco.get().setUF(uModel.getUF());
-               
 
                 uRepository.save(atualizaEndereco.get());
                 return userResponsesEnum.uUpdate.getResponseObject();
@@ -107,12 +92,4 @@ public class userAdressService {
         }
 
     }
-
- 
-
-
-        
-    
 }
-
-

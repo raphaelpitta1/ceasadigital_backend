@@ -12,8 +12,7 @@ import javax.persistence.Id;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-
-@Entity(name="Oferta")
+@Entity(name = "Oferta")
 public class ofertaModel {
 
     @Id
@@ -26,12 +25,13 @@ public class ofertaModel {
     private float pesoUnMedida;
     private float vlUnMedida;
     private float vlKG;
-    private boolean status=true;
-    
-    @CreationTimestamp 
+    private boolean status = true;
+
+    @CreationTimestamp
     private Timestamp createDate;
-    @UpdateTimestamp 
+    @UpdateTimestamp
     private Timestamp updateDate;
+
     public ofertaModel() {
     }
 
@@ -44,7 +44,7 @@ public class ofertaModel {
         this.pesoUnMedida = pesoUnMedida;
         this.vlUnMedida = vlUnMedida;
         this.vlKG = vlKG;
-        
+
     }
 
     public int getQtdDisponivel() {
